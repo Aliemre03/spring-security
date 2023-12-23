@@ -6,44 +6,45 @@ import org.springframework.security.core.userdetails.UserDetails
 
 @Entity
 @Table(name = "users")
-data class User : UserDetails(
+data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
-    val username: String,
-    val password: String,
-    val name: String,
-    val accountNonexpired: Boolean,
-    val isenabled: Boolean,
-    val accountNonlocked: Boolean,
-    val credentialsNonexpired: Boolean,
-    val role:Set<Role>
-) {
-    override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        TODO("Not yet implemented")
-    }
+    val id: Long? = null,
+    private val username: String,
+    private val password: String,
+    private val name: String,
 
+    private val accountNonExpired: Boolean = true,
+    private val isEnabled: Boolean = true,
+    val accountNonLocked: Boolean = true,
+    val credentialsNonExpired: Boolean = true,
+    val roles: List<Role>
+) : UserDetails {
+
+    override fun getAuthorities(): List<GrantedAuthority> {
+        return roles//convert roles to GrantedAuthority
+    }
     override fun getPassword(): String {
-        TODO("Not yet implemented")
+        return this.password
     }
 
     override fun getUsername(): String {
-        TODO("Not yet implemented")
+        return username
     }
 
     override fun isAccountNonExpired(): Boolean {
-        TODO("Not yet implemented")
+        return accountNonExpired
     }
 
     override fun isAccountNonLocked(): Boolean {
-        TODO("Not yet implemented")
+        return accountNonLocked
     }
 
     override fun isCredentialsNonExpired(): Boolean {
-        TODO("Not yet implemented")
+        return credentialsNonExpired
     }
 
     override fun isEnabled(): Boolean {
-        TODO("Not yet implemented")
+        return isEnabled
     }
 }
