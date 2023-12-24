@@ -3,7 +3,8 @@ package com.aed.jwt.service
 import com.aed.jwt.model.User
 import com.aed.jwt.dto.UserCreateRequest
 import com.aed.jwt.repository.UserRepository
-import org.springframework.security.core.userdetails.UserDetails
+
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
